@@ -32,6 +32,8 @@ private:
 
    int atrHandler;
 
+   virtual double getVolatility(int period, ENUM_TIMEFRAMES);
+   
    double getFromIndicator(int handle, int mode=0, int shift=0) {
    	
    	static double buffer[1];
@@ -166,6 +168,15 @@ PaltformMarketInfoService::PaltformMarketInfoService() {
 //+------------------------------------------------------------------+
 PaltformMarketInfoService::~PaltformMarketInfoService() {
 
+}
+//+---------------------------------------------------------------+
+double PaltformMarketInfoService::getVolatility(int period, ENUM_TIMEFRAMES timeframe = PERIOD_CURRENT){
+
+   if(atrHandler < 0){
+      atrHandler = iATR(Symbol(), timeframe, period);
+   }
+   
+   return getFromIndicator(atrHandler, 0, 1);
 }
 //+---------------------------------------------------------------+
 string PaltformMarketInfoService::getSymbol(){
