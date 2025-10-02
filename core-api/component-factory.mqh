@@ -32,6 +32,7 @@
 //+ Provides centralized lifecycle management and dependency         |
 //+ resolution.                                                      |
 //+------------------------------------------------------------------+
+template <typename C>
 class ComponentFactory {
 
 private:
@@ -39,17 +40,20 @@ private:
 public:
    ComponentFactory();
    ~ComponentFactory();
-
+   
+   virtual C* get() = 0;
 };
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+
+template <typename C>
 ComponentFactory::ComponentFactory() {
 
 }
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+
+template <typename C>
 ComponentFactory::~ComponentFactory() {
 
 }
